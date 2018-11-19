@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GDG-Jetpack</string>
+    <string name="users_title">Github Users</string>
+    <string name="user_title">Github User</string>
+    <string name="memo_title">Memo</string>
+    <string name="memo_hint">메모를 입력해주세요</string>
+    <string name="confirm">확인</string>
+</resources>

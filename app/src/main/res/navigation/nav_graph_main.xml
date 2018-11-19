@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/usersFragment">
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.maryang.jetpack.ui.users.UsersFragment"
+        android:label="@string/users_title"
+        tools:layout="@layout/fragment_users">
+        <action
+            android:id="@+id/action_usersFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.maryang.jetpack.ui.user.UserFragment"
+        android:label="@string/user_title"
+        tools:layout="@layout/fragment_user">
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+</navigation>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large"
+        android:layout_marginTop="@dimen/large"
+        android:layout_marginEnd="@dimen/large"
+        android:layout_marginBottom="@dimen/half_large"
+        android:text="@string/users_title"
+        android:textSize="@dimen/font_large" />
+
+    <Button
+        android:id="@+id/btn_memo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large"
+        android:layout_marginTop="@dimen/half_large"
+        android:layout_marginEnd="@dimen/large"
+        android:layout_marginBottom="@dimen/large"
+        android:text="@string/memo_title"
+        android:textSize="@dimen/font_large" />
+</LinearLayout>
