@@ -1,12 +1,12 @@
 package com.maryang.jetpack.ui.base;
 
-import android.util.Log;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ViewModel;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class BasePresenter implements LifecycleObserver {
+public class BasePresenter extends ViewModel implements LifecycleObserver {
 
     protected CompositeDisposable compositeDisposable;
 

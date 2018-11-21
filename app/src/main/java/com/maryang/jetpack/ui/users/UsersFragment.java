@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.inflearn.lightinstagram.ui.view.LoadingBar;
@@ -47,8 +49,10 @@ public class UsersFragment extends BaseFragment implements UsersPresenter.View {
     }
 
     private void setPresenter() {
-        presenter = new UsersPresenter(this);
-        getLifecycle().addObserver(presenter);
+        Lifecycle lifecycle = getLifecycle();
+        presenter = ViewModelProviders.of(activity).get(UsersPresenter.class);
+        presenter.initialize(this, lifecycle);
+        lifecycle.addObserver(presenter);
         presenter.getUsers().observe(this, users -> adapter.refresh(users));
         presenter.listUsers();
     }

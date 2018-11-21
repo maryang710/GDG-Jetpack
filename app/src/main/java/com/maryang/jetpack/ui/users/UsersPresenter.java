@@ -1,5 +1,6 @@
 package com.maryang.jetpack.ui.users;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.MutableLiveData;
 import com.maryang.jetpack.data.entity.User;
 import com.maryang.jetpack.data.source.UserRepository;
@@ -11,6 +12,7 @@ import java.util.List;
 public class UsersPresenter extends BasePresenter {
 
     private View view;
+    private Lifecycle lifecycle;
     private UserRepository repository = UserRepository.get();
     private MutableLiveData<List<User>> users = new MutableLiveData<>();
 
@@ -18,8 +20,10 @@ public class UsersPresenter extends BasePresenter {
         return users;
     }
 
-    public UsersPresenter(View view) {
+    public void initialize(View view, Lifecycle lifecycle) {
+        if (this.view != null) return;
         this.view = view;
+        this.lifecycle = lifecycle;
     }
 
     public void listUsers() {
@@ -28,7 +32,8 @@ public class UsersPresenter extends BasePresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(users -> {
                     view.hideLoader();
-                    this.users.postValue(users);
+                    if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.CREATED))
+                        this.users.postValue(users);
                 }, t -> {
                     t.printStackTrace();
                     view.hideLoader();
