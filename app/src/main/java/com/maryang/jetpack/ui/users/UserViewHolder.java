@@ -41,10 +41,6 @@ public class UserViewHolder extends BaseViewHolder<User> implements View.OnClick
 
     @Override
     public void onClick(View v) {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.box_fragment, UserFragment.newInstance(user.getName()));
-//        transaction.commit();
-
         Navigation.findNavController(v).navigate(
                 UsersFragmentDirections.actionUsersFragmentToUserFragment(user.getName()));
     }

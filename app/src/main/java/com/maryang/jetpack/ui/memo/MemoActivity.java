@@ -8,8 +8,6 @@ import com.maryang.jetpack.ui.base.BaseActivity;
 
 public class MemoActivity extends BaseActivity {
 
-    private MemoDisplayFragment displayFragment;
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_memo;
@@ -22,14 +20,9 @@ public class MemoActivity extends BaseActivity {
     }
 
     private void setFragment() {
-        displayFragment = new MemoDisplayFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.box_display, displayFragment);
+        transaction.add(R.id.box_display, new MemoDisplayFragment());
         transaction.add(R.id.box_type, new MemoTypeFragment());
         transaction.commit();
-    }
-
-    public void showMemo(String memo) {
-        displayFragment.showMemo(memo);
     }
 }

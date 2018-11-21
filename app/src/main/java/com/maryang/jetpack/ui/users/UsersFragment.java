@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.inflearn.lightinstagram.ui.view.LoadingBar;
 import com.maryang.jetpack.R;
-import com.maryang.jetpack.data.entity.User;
 import com.maryang.jetpack.ui.base.BaseFragment;
-
-import java.util.List;
 
 public class UsersFragment extends BaseFragment implements UsersPresenter.View {
 
@@ -35,14 +32,7 @@ public class UsersFragment extends BaseFragment implements UsersPresenter.View {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRecyclerView();
-        presenter = new UsersPresenter(this);
-        presenter.listUsers();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.onDestroy();
+        setPresenter();
     }
 
     private void findView(View view) {
@@ -56,6 +46,13 @@ public class UsersFragment extends BaseFragment implements UsersPresenter.View {
         recyclerView.setAdapter(adapter);
     }
 
+    private void setPresenter() {
+        presenter = new UsersPresenter(this);
+        getLifecycle().addObserver(presenter);
+        presenter.getUsers().observe(this, users -> adapter.refresh(users));
+        presenter.listUsers();
+    }
+
     @Override
     public void showLoader() {
         loadingBar.show();
@@ -64,10 +61,5 @@ public class UsersFragment extends BaseFragment implements UsersPresenter.View {
     @Override
     public void hideLoader() {
         loadingBar.hide();
-    }
-
-    @Override
-    public void onListUsers(List<User> users) {
-        adapter.refresh(users);
     }
 }

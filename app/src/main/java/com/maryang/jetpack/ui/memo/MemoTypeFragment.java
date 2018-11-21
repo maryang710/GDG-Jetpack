@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 import com.maryang.jetpack.R;
 import com.maryang.jetpack.ui.base.BaseFragment;
 
@@ -13,6 +14,7 @@ public class MemoTypeFragment extends BaseFragment {
 
     private EditText inputText;
     private Button btnConfirm;
+    private MemoViewModel viewModel;
 
     @Override
     protected int getLayoutId() {
@@ -28,6 +30,7 @@ public class MemoTypeFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        viewModel = ViewModelProviders.of(activity).get(MemoViewModel.class);
         setButton();
     }
 
@@ -37,9 +40,6 @@ public class MemoTypeFragment extends BaseFragment {
     }
 
     private void setButton() {
-        btnConfirm.setOnClickListener(v -> {
-            MemoActivity activity = ((MemoActivity) getActivity());
-            activity.showMemo(inputText.getText().toString());
-        });
+        btnConfirm.setOnClickListener(v -> viewModel.setMemo(inputText.getText().toString()));
     }
 }

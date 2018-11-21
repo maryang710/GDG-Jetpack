@@ -6,21 +6,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.maryang.jetpack.R;
-import com.maryang.jetpack.data.entity.User;
 import com.maryang.jetpack.ui.base.BaseFragment;
 
 public class UserFragment extends BaseFragment {
 
     private TextView txtName;
-
-    public static UserFragment newInstance(String userName) {
-        Bundle args = new Bundle();
-        args.putString(User.INTENT_KEY, userName);
-
-        UserFragment fragment = new UserFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     protected int getLayoutId() {
@@ -44,9 +34,6 @@ public class UserFragment extends BaseFragment {
     }
 
     private void setName() {
-//        String userName = getArguments().getString(User.INTENT_KEY);
-//        txtName.setText(userName);
-
         UserFragmentArgs args = UserFragmentArgs.fromBundle(getArguments());
         txtName.setText(args.getUsername());
     }

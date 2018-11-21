@@ -5,12 +5,14 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProviders;
 import com.maryang.jetpack.R;
 import com.maryang.jetpack.ui.base.BaseFragment;
 
 public class MemoDisplayFragment extends BaseFragment {
 
     private TextView txtMemo;
+    private MemoViewModel viewModel;
 
     @Override
     protected int getLayoutId() {
@@ -23,11 +25,14 @@ public class MemoDisplayFragment extends BaseFragment {
         findView(view);
     }
 
-    private void findView(View view) {
-        txtMemo = view.findViewById(R.id.txt_memo);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel = ViewModelProviders.of(activity).get(MemoViewModel.class);
+        viewModel.getMemo().observe(this, memo -> txtMemo.setText(memo));
     }
 
-    public void showMemo(String memo) {
-        txtMemo.setText(memo);
+    private void findView(View view) {
+        txtMemo = view.findViewById(R.id.txt_memo);
     }
 }
