@@ -34,8 +34,8 @@ public class UsersFragment extends BaseFragment implements UsersPresenter.View {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setViewModel();
         setRecyclerView();
+        presenter = new UsersPresenter(this);
         presenter.listUsers();
     }
 
@@ -48,10 +48,6 @@ public class UsersFragment extends BaseFragment implements UsersPresenter.View {
     private void findView(View view) {
         recyclerView = view.findViewById(R.id.recyclerview);
         loadingBar = view.findViewById(R.id.loading);
-    }
-
-    private void setViewModel() {
-        presenter = new UsersPresenter(this);
     }
 
     private void setRecyclerView() {
